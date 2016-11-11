@@ -1,0 +1,85 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2016-11-11 12:26+0700\n"
+"PO-Revision-Date: 2016-11-11 12:26+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8\n"
+"X-Poedit-Basepath: ..\\..\\..\\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: expo.php:113
+msgid "First Name"
+msgstr "Förnamn"
+
+#: expo.php:114
+msgid "Please enter your first name"
+msgstr "Fyll i ditt förnamn"
+
+#: expo.php:115
+msgid "Last Name"
+msgstr "Efternamn"
+
+#: expo.php:116
+msgid "Please enter your last name"
+msgstr ""
+
+#: expo.php:117
+msgid "Email"
+msgstr "Email"
+
+#: expo.php:118
+msgid "Please enter your email"
+msgstr "Fyll i din e-postadress"
+
+#: expo.php:119
+msgid "Please enter a valid email"
+msgstr "Fyll i en giltig e-postadress"
+
+#: expo.php:120
+msgid "Email domain don't exist"
+msgstr ""
+
+#: expo.php:122
+msgid "Please enter your phonenumber"
+msgstr "Fyll i ditt telefonnummer"
+
+#: expo.php:123
+msgid "Please enter a valid phonenumber"
+msgstr "Fyll i ett giltigt telefonnummer"
+
+#: expo.php:124
+msgid ""
+"Search the list by typing your country name, or enter your country code to "
+"select country"
+msgstr ""
+"Sök i listan genom att skriva in första bokstäverna i ditt land, eller välj "
+"genom att ange landskod i telefonummret"
+
+#: expo.php:133
+msgid "Submit"
+msgstr "Skicka"
+
+#: expo.php:137
+msgid "Thank you!"
+msgstr ""
+
+#: expo.php:138
+msgid "We have sent more info to your email."
+msgstr ""
+
+# Test token 1
+#~ msgid "HELLO_WORLD"
+#~ msgstr "Hele;lkjl!"
+
+# Test token 2
+#~ msgid "TEST_TRANSLATION"
+#~ msgstr "Testing translation..."
