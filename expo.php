@@ -48,8 +48,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <title><?php echo $title; ?></title>
-    
+
     <?php if ( isset($_POST['submit']) ): ?>
       <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" />
     <?php else: ?>
