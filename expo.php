@@ -1,4 +1,5 @@
 <?php
+ 
   // Submit handler
   if (isset($_POST["submit"])) {
     
@@ -11,7 +12,31 @@
   $expo_name  = $vars[0];
   $title      = $vars[1];
   $market     = $vars[2];
-  $language   = $vars[3];
+  $language   = $vars[3];  
+ 
+  $markets = array(
+    'en' => 'Europe/London',
+    'se' => 'Europe/Stockholm',
+    'no' => 'Europe/Stockholm',
+    'dk' => 'Europe/Stockholm',
+    'fi' => 'Europe/Stockholm',
+    'ie' => 'Europe/Dublin',
+    'de' => 'Europe/Stockholm',
+    'nl' => 'Europe/Stockholm',
+    'es' => 'Europe/Madrid',
+    'fr' => 'Europe/Paris',
+    'it' => 'Europe/Rome',
+    'au' => 'Europe/Sidney',
+    'in' => 'Asia/Karachi',
+    'us' => 'America/New_York '
+  );
+  
+  if (!$markets[$market]){
+    exit( sprintf("Unsupported market, supported values: %s.", implode(', ', array_keys($markets))) );
+  } else {
+      date_default_timezone_set( $markets[$market] );
+  };
+  
   $from_date = DateTime::createFromFormat('j-M-Y', $vars[4]);
   $to_date = DateTime::createFromFormat('j-M-Y', $vars[5]);
   $today = new DateTime();
@@ -21,6 +46,7 @@
   } elseif ( !($today >= $from_date && $today <= $to_date) ) {
     exit('This event is not currently active');    
   };
+
   // I18N support
   $SupportedLanguages = array(
     'sv' => 'sv_SE',
