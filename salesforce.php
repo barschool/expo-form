@@ -16,7 +16,6 @@
     require_once('./config.php');
         
     $url = SF_INSTANCE_URL . "/services/oauth2/token";
-    $url = 'http://requestb.in/1flttwa1';
     $ch = curl_init($url);
 
     $content = 	"grant_type=password" .
@@ -34,7 +33,6 @@
 
     $data = curl_exec($ch);
     curl_close($ch);
-
     $data = json_decode($data, true);
     return $data['access_token'];
   }

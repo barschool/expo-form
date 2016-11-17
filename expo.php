@@ -2,10 +2,9 @@
  
   // Submit handler
   if (isset($_POST["submit"])) {
-    
     include_once('./salesforce.php');
     $result = createLead();
-  }
+  };
   
   $vars = explode('/',$_GET['q']);
 
@@ -31,22 +30,23 @@
     'us' => 'America/New_York '
   );
   
-  if (!$markets[$market]){
-    exit( sprintf("Unsupported market, supported values: %s.", implode(', ', array_keys($markets))) );
-  } else {
+  if (!isset($_POST['submit'])){
+    if (!$markets[$market]){
+      exit( sprintf("Unsupported market, supported values: %s.", implode(', ', array_keys($markets))) );
+    } else {
       date_default_timezone_set( $markets[$market] );
+      $from_date = DateTime::createFromFormat('j-M-Y', $vars[4]);
+      $to_date = DateTime::createFromFormat('j-M-Y', $vars[5]);
+      $today = new DateTime();
+      
+      if ( !$from_date || !$to_date ){
+        exit('Invalid date(s) supplied, expected format: 13-Nov-2016.');
+      } elseif ( !($today >= $from_date && $today <= $to_date) ) {
+        exit('This event is not currently active');    
+      };
+    };
   };
   
-  $from_date = DateTime::createFromFormat('j-M-Y', $vars[4]);
-  $to_date = DateTime::createFromFormat('j-M-Y', $vars[5]);
-  $today = new DateTime();
-
-  if ( !$from_date || !$to_date ){
-    exit('Invalid date(s) supplied, expected format: 13-Nov-2016.');
-  } elseif ( !($today >= $from_date && $today <= $to_date) ) {
-    exit('This event is not currently active');    
-  };
-
   // I18N support
   $SupportedLanguages = array(
     'sv' => 'sv_SE',
