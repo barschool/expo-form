@@ -29,7 +29,11 @@
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSLVERSION, 6);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
+    curl_setopt($ch, URLOPT_FRESH_CONNECT, true);
+    //curl_setopt($ch, CURLOPT_VERBOSE, true);
+    //curl_setopt($ch, CURLOPT_STDERR, fopen('php://stderr', 'w'));
 
     $data = curl_exec($ch);
     curl_close($ch);
@@ -51,9 +55,9 @@
       'SE' => 'sv'
     );
     
+    $site_market    = strtoupper($_POST['option_market']);
     $language       = isset($SfLanguages[ $site_market ]) ? $SfLanguages[ $site_market ] : 'en_US';
     $debug          = false;
-    $site_market    = strtoupper($_POST['option_market']);
     $email          = FRC2822_email($_POST['email']);
     
     $LeadData = json_encode(array(
@@ -73,9 +77,8 @@
     
     $access_token = salesforceAuthenticate();
     $url = SF_INSTANCE_URL . '/services/data/v20.0/sobjects/Lead/';
-
     $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER,array(
       "Authorization: OAuth $access_token",
@@ -84,7 +87,8 @@
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $LeadData);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
+    curl_setopt($ch, CURLOPT_SSLVERSION, 6);
+    curl_setopt($ch, URLOPT_FRESH_CONNECT, true);
     $json_response = curl_exec($ch);
     $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
@@ -92,8 +96,8 @@
     if ( $status != 201 ) {
       $error['error'] = true;
       $error['response'] = $json_response;
-      return $error;
-      //die("Error: call to URL $url failed with status $status, response $json_response");
+      //return $error;
+      die("Error: call to URL $url failed with status $status, response $json_response");
     } else {
       $response = json_decode($json_response, true);
       return $response["id"];
