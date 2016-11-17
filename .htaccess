@@ -1,4 +1,11 @@
 RewriteEngine On
+
+RewriteCond %{HTTPS} off
+RewriteRule .* - [E=REQUEST_SCHEME:http]
+
+RewriteCond %{HTTPS} on
+RewriteRule .* - [E=REQUEST_SCHEME:https]
+
 RewriteBase /expo
 
 RewriteCond %{REQUEST_FILENAME} !-d
