@@ -12,8 +12,15 @@
   $title      = $vars[1];
   $market     = $vars[2];
   $language   = $vars[3];
-  $tz         = $vars[4];
-  
+  $from_date = DateTime::createFromFormat('j-M-Y', $vars[4]);
+  $to_date = DateTime::createFromFormat('j-M-Y', $vars[5]);
+  $today = new DateTime();
+
+  if ( !$from_date || !$to_date ){
+    exit('Invalid date(s) supplied, expected format: 13-Nov-2016.');
+  } elseif ( !($today >= $from_date && $today <= $to_date) ) {
+    exit('This event is not currently active');    
+  };
   // I18N support
   $SupportedLanguages = array(
     'sv' => 'sv_SE',
