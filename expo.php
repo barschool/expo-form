@@ -1,5 +1,4 @@
 <?php
-  require_once('./config.php');
   // Submit handler
   if (isset($_POST["submit"])) {
     include_once('./salesforce.php');
@@ -85,7 +84,7 @@
     <title><?php echo $title; ?></title>
 
     <?php if ( isset($_POST['submit']) ): ?>
-    <?php /*<meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" /> */ ?>
+    <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" />
     <?php else: ?>
       <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
       <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
