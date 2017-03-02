@@ -1,6 +1,6 @@
 <?php
 
-  function FRC2822_email($email){
+  function RFC2822_email($email){
     $email_lower = strtolower($email);
     $pattern = "/(?:[a-z0-9!#$%&'*+\/\=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/\=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/";
     preg_match($pattern, $email_lower, $matched_email);
@@ -11,10 +11,10 @@
       return $matched_email[0];
     }
   }
-  
+
   function salesforceAuthenticate(){
     require_once('./config.php');
-        
+
     $url = SF_INSTANCE_URL . "/services/oauth2/token";
     $ch = curl_init($url);
 
@@ -31,7 +31,7 @@
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSLVERSION, 6);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
-    curl_setopt($ch, URLOPT_FRESH_CONNECT, true);
+    curl_setopt($ch, URLOPT_FRESH_CONNECT, 1);
     //curl_setopt($ch, CURLOPT_VERBOSE, true);
     //curl_setopt($ch, CURLOPT_STDERR, fopen('php://stderr', 'w'));
 
@@ -42,7 +42,7 @@
   }
 
   function createLead(){
-    
+
     $SfLanguages = array(
       'DE' => 'de',
       'DK' => 'da',
@@ -54,13 +54,13 @@
       'NO' => 'no',
       'SE' => 'sv'
     );
-    
+
     $site_market    = strtoupper($_POST['option_market']);
     $language       = isset($SfLanguages[ $site_market ]) ? $SfLanguages[ $site_market ] : 'en_US';
     $debug          = false;
-    $email          = FRC2822_email($_POST['email']);
-    
-    $LeadData = json_encode(array(
+    $email          = RFC2822_email($_POST['email']);
+
+    $LeadData = array(
       'Email'               => $email,
       'FirstName'           => $_POST['firstname'],
       'LastName'            => $_POST['lastname'],
@@ -70,11 +70,20 @@
       'Language__c'         => $language,
       'Page_URL__c'         => $_SERVER['HTTP_REFERER'],
       'Page_title__c'       => $_POST['title'],
-      'UTM_Source__c'       => $_POST['utm_source'],
-      'UTM_Medium__c'       => $_POST['utm_medium'],
       'Timezone__c'         => $_POST['timezonediff'],
-    ));
+    );
+
+    if ($_POST['utm_medium'] === 'School Referral') {
+      $LeadData['LeadSource'] = 'School Referral';
+      $LeadData['Referring_School__c'] = $_POST['title'];
+    } else {
+      $LeadData['LeadSource'] = 'Expos';
+      $LeadData['UTM_Source__c'] = $_POST['utm_source'];
+      $LeadData['UTM_Medium__c'] = $_POST['utm_medium'];
+    }
     
+    $LeadData = json_encode($LeadData);
+
     $access_token = salesforceAuthenticate();
     $url = SF_INSTANCE_URL . '/services/data/v20.0/sobjects/Lead/';
     $ch = curl_init($url);
@@ -88,7 +97,7 @@
     curl_setopt($ch, CURLOPT_POSTFIELDS, $LeadData);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSLVERSION, 6);
-    curl_setopt($ch, URLOPT_FRESH_CONNECT, true);
+    curl_setopt($ch, URLOPT_FRESH_CONNECT, 1);
     $json_response = curl_exec($ch);
     $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);

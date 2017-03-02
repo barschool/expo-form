@@ -1,18 +1,17 @@
 <?php
- 
   // Submit handler
   if (isset($_POST["submit"])) {
     include_once('./salesforce.php');
     $result = createLead();
   };
-  
+
   $vars = explode('/',$_GET['q']);
 
   $expo_name  = $vars[0];
   $title      = $vars[1];
   $market     = $vars[2];
-  $language   = $vars[3];  
- 
+  $language   = $vars[3];
+
   $markets = array(
     'en' => 'Europe/London',
     'se' => 'Europe/Stockholm',
@@ -29,7 +28,7 @@
     'in' => 'Asia/Karachi',
     'us' => 'America/New_York '
   );
-  
+
   if (!isset($_POST['submit'])){
     if (!$markets[$market]){
       exit( sprintf("Unsupported market, supported values: %s.", implode(', ', array_keys($markets))) );
@@ -38,15 +37,15 @@
       $from_date = DateTime::createFromFormat('j-M-Y', $vars[4]);
       $to_date = DateTime::createFromFormat('j-M-Y', $vars[5]);
       $today = new DateTime();
-      
+
       if ( !$from_date || !$to_date ){
         exit('Invalid date(s) supplied, expected format: 13-Nov-2016.');
       } elseif ( !($today >= $from_date && $today <= $to_date) ) {
-        exit('This event is not currently active');    
+        exit('This event is not currently active');
       };
     };
   };
-  
+
   // I18N support
   $SupportedLanguages = array(
     'sv' => 'sv_SE',
@@ -59,18 +58,18 @@
     'it' => 'it_IT',
     'fr' => 'fr_FR'
   );
-  
+
   $language = array_key_exists($language, $SupportedLanguages) ? $SupportedLanguages[$language] : 'en_US';
   $language = "$language.UTF-8";
-  putenv("LANG=" . $language); 
+  putenv("LANG=" . $language);
   setlocale(LC_ALL, $language);
   $domain = "messages";
-  bindtextdomain($domain, "Locale"); 
+  bindtextdomain($domain, "Locale");
   bind_textdomain_codeset($domain, 'UTF-8');
   textdomain($domain);
   // Have to use absolute url because of the rewriting in .htaccess
   $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/expo';
-  
+
   // Helper to clean template
   function _e($text){
     echo _($text);
@@ -85,7 +84,7 @@
     <title><?php echo $title; ?></title>
 
     <?php if ( isset($_POST['submit']) ): ?>
-      <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" />
+    <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" />
     <?php else: ?>
       <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
       <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
@@ -96,13 +95,13 @@
       <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/intlTelInput.js"; ?>'></script>
       <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/utils.js"; ?>'></script>
     <?php endif ?>
-    
+
     <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/style.css"; ?>'>
-    
+
     <!-- Dynamic styles -->
     <style>
-      html { 
-        background: url(<?php echo "$url/assets/img/IMG_3648.jpg" ?>) no-repeat center center fixed; 
+      html {
+        background: url(<?php echo "$url/assets/img/IMG_3648.jpg" ?>) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -123,7 +122,7 @@
       }
     </style>
   </head>
-  
+
   <body>
     <div id="page-wrap">
       <img src=<?php echo "$url/assets/img/ebs_logo.jpg" ?> width="325px" height="99px" border="0px"><br/><br/>
@@ -155,9 +154,9 @@
           <h2><?php _e('Thank you!'); ?></h2>
           <h4><?php _e('We have sent more info to your email.'); ?></h4>
         <?php endif; ?>
-        
+
       <?php echo $expo_name ?>
     </div>
   </body>
-  
+
 </html>
