@@ -1,4 +1,43 @@
 $(document).ready(function(){
+  $.fn.popover.Constructor.DEFAULTS.container = 'body';
+  $.fn.popover.Constructor.DEFAULTS.placement = 'right';
+  $.fn.popover.Constructor.DEFAULTS.trigger = 'manual';
+  $.fn.popover.Constructor.DEFAULTS.html = 'true';
+
+/*
+  $('input#firstname').popover({
+    content: '<i class="glyphicon glyphicon-exclamation-sign"></i><span class="validation-message">content</span>',
+  }).popover('show');
+*/
+  $('label.destination').click(function(e){
+    var limit = 2;
+    var cnt = $("input[type='checkbox']:checked", $(this).closest('.form-group')).length;
+    if (cnt > limit && !$(this).hasClass('active')){
+      return false;
+    };
+  });
+
+  $('label.age').click(function(e){
+    var cnt = $("input[type='checkbox']:checked", $(this).closest('.form-group')).length;
+    if (cnt > 0){
+      $(this).closest('.items').siblings().each(function(){
+        $('label.active', $(this)).removeClass('active');
+        $('input[type="checkbox"]', $(this)).prop("checked", "")
+      });
+    };
+  });
+/*
+  $("input[type='checkbox']").change(function () {
+      var maxAllowed = 2;
+      var cnt = $("input[type='checkbox']:checked").length;
+      if (cnt > maxAllowed) {
+        $(this).prop("checked", "");
+        console.log( $(this).closest('label') );
+        //alert('Select maximum ' + maxAllowed + ' technologies!');
+      }
+    }
+  );
+*/
   var host = window.location.href.substring(0, window.location.href.length - window.location.pathname.length) + '/expo';
   $("#hsForm_top").attr("target","_self");
   $("#hsForm_bottom").attr("target","_self");
@@ -31,7 +70,7 @@ $(document).ready(function(){
     $('.itlPhoneFull').each(function(){
       $(this).val( value );
     });
-    $('.itlPhoneFull', $(this).parents('form:first')).valid();
+    //$('.itlPhoneFull', $(this).parents('form:first')).valid();
   });
 
   // Format and sync on blur
@@ -52,6 +91,15 @@ $(document).ready(function(){
 
   $('input:not(#itlPhoneFull)').change(function(){
     $(this).valid();
+    if ( $(this).hasClass('valid') ){
+      $(this).popover('hide');
+    };
+  })
+  $('input:not(#itlPhoneFull)').blur(function(){
+    $(this).valid();
+    if ( $(this).hasClass('valid') ){
+      $(this).popover('hide');
+    };
   })
 
   $('#itl-phone').change(function(){
@@ -60,6 +108,9 @@ $(document).ready(function(){
     element.val( $(this).intlTelInput("getNumber") );
     phoneCountry.val( $(this).intlTelInput("getSelectedCountryData").iso2 )
     element.valid();
+    if ( element.hasClass('valid') ){
+        $('.intl-tel-input').popover('hide');
+    };
   })
 
   // Helper function to set validation messages from data-msg on inputs
@@ -116,10 +167,18 @@ $(document).ready(function(){
         },
       },
       errorPlacement: function(error, element) {
-        error.appendTo( $('.validation-messages', $this) ).css("display", "block").addClass('sf-validation');
-        if (typeof $.fn.matchHeight !== 'undefined'){
-          $('.info-boxes__box').matchHeight();
-        }
+       element = element.hasClass('itlPhoneFull') ? $('.intl-tel-input') : element;
+       element.popover({
+         content: 'test',
+       });
+       var content = '<i class="glyphicon glyphicon-exclamation-sign"></i><span class="validation-message">' + error[0].textContent + '</span>';
+        element.data('bs.popover').options.content = content;
+        element.popover('show');
+
+        //error.appendTo( $('.validation-messages', $this) ).css("display", "block").addClass('sf-validation');
+        //if (typeof $.fn.matchHeight !== 'undefined'){
+        //  $('.info-boxes__box').matchHeight();
+        //}
       },
     });
   });

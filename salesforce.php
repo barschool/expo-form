@@ -69,19 +69,31 @@
       'Market_ISO_code__c'  => $site_market,
       'Language__c'         => $language,
       'Page_URL__c'         => $_SERVER['HTTP_REFERER'],
-      'Page_title__c'       => $_POST['title'],
       'Timezone__c'         => $_POST['timezonediff'],
     );
 
     if ($_POST['utm_medium'] === 'School Referral') {
       $LeadData['LeadSource'] = 'School Referral';
       $LeadData['Referring_School__c'] = $_POST['title'];
+      $LeadData['Page_title__c'] = $_POST['title'];
+
     } else {
       $LeadData['LeadSource'] = 'Expos';
       $LeadData['UTM_Source__c'] = $_POST['utm_source'];
-      $LeadData['UTM_Medium__c'] = $_POST['utm_medium'];
-    }
-    
+      $LeadData['Expo_City__c'] = $_POST['utm_medium'];
+      $LeadData['Expo_Manager__c'] = $_POST['title'];
+      //$LeadData['Expo_Name__c'] = $_POST['utm_medium']; Need to add one more path component for this if really needed.
+      $LeadData['Expo_date__c'] = $_POST['date'];
+      if( !empty($_POST['schools']) ){
+        foreach($_POST['schools'] as $key => $school){
+          $LeadData['School_choice_' . ($key + 1) . '__c'] = $school;
+        };
+      };
+      if( !empty($_POST['age']) ){
+          $LeadData['Age_group__c'] = $_POST['age'][0];
+      };
+    };
+
     $LeadData = json_encode($LeadData);
 
     $access_token = salesforceAuthenticate();

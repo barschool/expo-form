@@ -74,6 +74,40 @@
   function _e($text){
     echo _($text);
   };
+
+  $Schools = array(
+    'Cape Town',
+    'Rome',
+    'Madrid',
+    'Mallorca',
+    'Miami',
+    'Las Vegas',
+    'St. Martin',
+    'Berlin',
+    'Paris',
+    'Milan',
+    'New York',
+    'Manchester',
+    'Amsterdam',
+    'Helsinki',
+    'Copenhagen',
+    'Kos',
+    'Dublin',
+    'London',
+    'Sydney',
+    'Phuket',
+    'Barcelona',
+    'Oslo',
+    'Stockholm',
+  );
+
+  $AgeGroups = array(
+    'Under 18',
+    '18-21',
+    '22-24',
+    '25-27',
+    '28+',
+  );
 ?>
 
 <!DOCTYPE html>
@@ -84,16 +118,18 @@
     <title><?php echo $title; ?></title>
 
     <?php if ( isset($_POST['submit']) ): ?>
-    <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" />
+    <?php /* <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" /> */ ?>
     <?php else: ?>
-      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-      <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-      <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+      <script src='<?php echo "$url/assets/js/vendor/jquery-1.11.1.min.js"; ?>'></script>
+      <script src='<?php echo "$url/assets/js/vendor/jquery.validate.min.js"; ?>'></script>
+      <script src='<?php echo "$url/assets/js/vendor/additional-methods.min.js"; ?>'>></script>
       <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/intlTelInput.css"; ?>'>
+      <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/bootstrap.min.css"; ?>'>
       <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/style.css"; ?>'>
       <script type="text/javascript" src='<?php echo "$url/assets/js/site.js"; ?>'></script>
       <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/intlTelInput.js"; ?>'></script>
       <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/utils.js"; ?>'></script>
+      <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/bootstrap.js"; ?>'></script>
     <?php endif ?>
 
     <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/style.css"; ?>'>
@@ -123,39 +159,103 @@
     </style>
   </head>
 
+  <?php $small = ($expo_name == 'School Referral');  ?>
   <body>
-    <div id="page-wrap">
-      <img src=<?php echo "$url/assets/img/ebs_logo.jpg" ?> width="325px" height="99px" border="0px"><br/><br/>
+    <div id="page-wrap" <?php echo ($expo_name == 'School Referral') ? 'class="small"' : ''; ?>>
+      <img class="logo" src=<?php echo "$url/assets/img/ebs_logo.jpg" ?>>
         <?php if ( !isset($_POST['submit']) ): ?>
         <form accept-charset="UTF-8" action='<?php echo $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data" id="form" method="POST">
-          <input type="text" id="firstname" name="firstname" placeholder="<?php _e('First Name'); ?>"
-            data-msg="<?php _e('Please enter your first name'); ?>"/>
-          <input type="text" class="hs-input" id="lastname" name="lastname" placeholder="<?php _e('Last Name'); ?>"
-            data-msg="<?php _e('Please enter your last name'); ?>"/>
-          <input type="email" class="hs-input" type="text" id="email" name="email" placeholder="<?php _e('Email'); ?>"
-            data-msg-required="<?php _e('Please enter your email'); ?>"
-            data-msg-format="<?php _e('Please enter a valid email'); ?>"
-            data-msg-domain="<?php _e("Email domain don't exist"); ?>" />
-          <input type="hidden" id="itlPhoneFull" class="itlPhoneFull brochure" name="itlPhoneFull" style="display: none"
-            data-msg-required="<?php _e('Please enter your phonenumber'); ?>"
-            data-msg-valid="<?php _e('Please enter a valid phonenumber'); ?>" />
-          <p name="itl-phone" class="jsonly"><?php _e('Search the list by typing your country name, or enter your country code to select country'); ?></p>
-          <input type="tel" name="itl-phone" id="itl-phone" class="itl-phone jsonly">
+          <div class="container">
+            <div class="row">
+              <div class="form-field <?php echo ($small) ? 'col-xs-12' : 'col-xs-6 col-xs-offset-3'; ?>">
+                <input type="text" id="firstname" name="firstname" placeholder="<?php _e('First Name'); ?>"
+                  data-msg="<?php _e('Please enter your first name'); ?>" data-toggle="popover"/>
+              </div>
+              <div class="form-field <?php echo ($small) ? 'col-xs-12' : 'col-xs-6 col-xs-offset-3'; ?>">
+                <input type="text" class="hs-input" id="lastname" name="lastname" placeholder="<?php _e('Last Name'); ?>"
+                  data-msg="<?php _e('Please enter your last name'); ?>" data-toggle="popover"/>
+              </div>
+              <div class="form-field <?php echo ($small) ? 'col-xs-12' : 'col-xs-6 col-xs-offset-3'; ?>">
+                <input type="email" class="hs-input" type="text" id="email" name="email" placeholder="<?php _e('Email'); ?>"
+                  data-msg-required="<?php _e('Please enter your email'); ?>"
+                  data-msg-format="<?php _e('Please enter a valid email'); ?>"
+                  data-msg-domain="<?php _e("Email domain don't exist"); ?>" data-toggle="popover"/>
+              </div>
+              <div class="form-field <?php echo ($small) ? 'col-xs-12' : 'col-xs-6 col-xs-offset-3'; ?>">
+                <input type="hidden" id="itlPhoneFull" class="itlPhoneFull brochure" name="itlPhoneFull" style="display: none"
+                  data-msg-required="<?php _e('Please enter your phonenumber'); ?>"
+                  data-msg-valid="<?php _e('Please enter a valid phonenumber'); ?>" data-toggle="popover"/>
+                <?php /* <p name="itl-phone" class="jsonly"><?php _e('Search the list by typing your country name, or enter your country code to select country'); ?></p> */ ?>
+                <input type="tel" name="itl-phone" id="itl-phone" class="itl-phone jsonly">
+              </div>
+          </div>
+          <?php if ( $expo_name != 'School Referral'): ?>
+          <div class="container multiselect">
+            <h4><?php _e('Your 3 favorite destinations...'); ?></h4>
+            <div class="row row-centered">
+              <div class="form-group">
+                  <div class="items-collection">
+
+                    <?php foreach ($Schools as $school): ?>
+                    <div class="items col-xs-2 col-centered">
+                        <div class="info-block block-info clearfix">
+                            <div data-toggle="buttons" class="btn-group multiselect">
+                                <label class="btn btn-default destination">
+                                    <div class="itemcontent">
+                                        <input type="checkbox" name="schools[]" autocomplete="off" value="<?php echo $school; ?>">
+                                        <h5><?php echo $school; ?></h5>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="container multiselect">
+            <h4><?php _e('Your Age...'); ?></h4>
+            <div class="row row-centered">
+              <div class="form-group">
+                  <div class="items-collection">
+
+                    <?php foreach ($AgeGroups as $ageGroup): ?>
+                    <div class="items col-xs-2 col-centered">
+                        <div class="info-block block-info clearfix">
+                            <div data-toggle="buttons" class="btn-group multiselect">
+                                <label class="btn btn-default age">
+                                    <div class="itemcontent">
+                                        <input type="checkbox" name="age[]" autocomplete="off" value="<?php echo $ageGroup; ?>">
+                                        <h5><?php echo $ageGroup; ?></h5>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <?php endif; ?>
+
           <input type="hidden" name="option_market" value="<?php echo $market; ?>">
           <input type="hidden" name="title" value="<?php echo $title; ?>">
           <input type="hidden" name="utm_source" value="Expo">
           <input type="hidden" name="utm_medium" value="<?php echo $expo_name; ?>">
           <input type="hidden" name="timezonediff" value="<?php echo $tz; ?>">
           <input type="hidden" name="geoip" id="geoip" value="">
-          <input type="submit" name="submit" value="<?php _e('Submit'); ?>">
-          <div class="validation-messages jsonly"></div>
+          <input type="hidden" name="date" value="<?php echo date_format($from_date, 'Y-m-d'); ?>">
+          <input type="submit" name="submit" <?php echo ($small) ? 'class="small"' : ''; ?>" value="<?php _e('Submit'); ?>">
         </form>
         <?php else: ?>
           <h2><?php _e('Thank you!'); ?></h2>
           <h4><?php _e('We have sent more info to your email.'); ?></h4>
         <?php endif; ?>
 
-      <?php echo $expo_name ?>
     </div>
   </body>
 
