@@ -118,7 +118,7 @@
     <title><?php echo $title; ?></title>
 
     <?php if ( isset($_POST['submit']) ): ?>
-    <?php /* <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" /> */ ?>
+    <meta http-equiv="refresh" content="3;URL='<?php echo $_SERVER['HTTP_REFERER'] ?>'" />
     <?php else: ?>
       <script src='<?php echo "$url/assets/js/vendor/jquery-1.11.1.min.js"; ?>'></script>
       <script src='<?php echo "$url/assets/js/vendor/jquery.validate.min.js"; ?>'></script>
