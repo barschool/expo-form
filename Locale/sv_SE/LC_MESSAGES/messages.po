@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-11-11 12:26+0700\n"
-"PO-Revision-Date: 2016-11-11 12:26+0700\n"
+"POT-Creation-Date: 2017-03-09 14:59+0700\n"
+"PO-Revision-Date: 2017-03-09 15:02+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -16,65 +16,68 @@ msgstr ""
 "X-Poedit-KeywordsList: _;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: expo.php:113
+#: expo.php:171
 msgid "First Name"
 msgstr "Förnamn"
 
-#: expo.php:114
+#: expo.php:172
 msgid "Please enter your first name"
 msgstr "Fyll i ditt förnamn"
 
-#: expo.php:115
+#: expo.php:175
 msgid "Last Name"
 msgstr "Efternamn"
 
-#: expo.php:116
+#: expo.php:176
 msgid "Please enter your last name"
-msgstr ""
+msgstr "Fyll i ditt efternamn"
 
-#: expo.php:117
+#: expo.php:179
 msgid "Email"
 msgstr "Email"
 
-#: expo.php:118
+#: expo.php:180
 msgid "Please enter your email"
 msgstr "Fyll i din e-postadress"
 
-#: expo.php:119
+#: expo.php:181
 msgid "Please enter a valid email"
 msgstr "Fyll i en giltig e-postadress"
 
-#: expo.php:120
+#: expo.php:182
 msgid "Email domain don't exist"
-msgstr ""
+msgstr " E-postadressen finns inte"
 
-#: expo.php:122
+#: expo.php:186
 msgid "Please enter your phonenumber"
 msgstr "Fyll i ditt telefonnummer"
 
-#: expo.php:123
+#: expo.php:187
 msgid "Please enter a valid phonenumber"
 msgstr "Fyll i ett giltigt telefonnummer"
 
-#: expo.php:124
-msgid ""
-"Search the list by typing your country name, or enter your country code to "
-"select country"
-msgstr ""
-"Sök i listan genom att skriva in första bokstäverna i ditt land, eller välj "
-"genom att ange landskod i telefonummret"
+#: expo.php:194
+msgid "Your 3 favorite destinations..."
+msgstr "Dina tre favorit-destinationer..."
 
-#: expo.php:133
+#: expo.php:219
+msgid "Your Age..."
+msgstr "Din ålder..."
+
+#: expo.php:252
 msgid "Submit"
 msgstr "Skicka"
 
-#: expo.php:137
+#: expo.php:255
 msgid "Thank you!"
-msgstr ""
+msgstr "Tack!"
 
-#: expo.php:138
+#: expo.php:256
 msgid "We have sent more info to your email."
-msgstr ""
+msgstr "Vi har skickat mer information till din email."
+
+#~ msgid "Search the list by typing your country name, or enter your country code to select country"
+#~ msgstr "Sök i listan genom att skriva in första bokstäverna i ditt land, eller välj genom att ange landskod i telefonummret"
 
 # Test token 1
 #~ msgid "HELLO_WORLD"

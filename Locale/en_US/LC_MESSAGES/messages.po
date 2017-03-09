@@ -1,23 +1,85 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-11-10 19:31+0700\n"
-"PO-Revision-Date: 2016-11-10 20:22+0700\n"
+"POT-Creation-Date: 2017-03-09 15:07+0700\n"
+"PO-Revision-Date: 2017-03-09 15:07+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-Basepath: ..\\..\\..\\\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en_US\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: expo.php:171
+msgid "First Name"
+msgstr ""
+
+#: expo.php:172
+msgid "Please enter your first name"
+msgstr ""
+
+#: expo.php:175
+msgid "Last Name"
+msgstr ""
+
+#: expo.php:176
+msgid "Please enter your last name"
+msgstr ""
+
+#: expo.php:179
+msgid "Email"
+msgstr ""
+
+#: expo.php:180
+msgid "Please enter your email"
+msgstr ""
+
+#: expo.php:181
+msgid "Please enter a valid email"
+msgstr ""
+
+#: expo.php:182
+msgid "Email domain don't exist"
+msgstr ""
+
+#: expo.php:186
+msgid "Please enter your phonenumber"
+msgstr ""
+
+#: expo.php:187
+msgid "Please enter a valid phonenumber"
+msgstr ""
+
+#: expo.php:194
+msgid "Your 3 favorite destinations..."
+msgstr ""
+
+#: expo.php:219
+msgid "Your Age..."
+msgstr ""
+
+#: expo.php:252
+msgid "Submit"
+msgstr ""
+
+#: expo.php:255
+msgid "Thank you!"
+msgstr ""
+
+#: expo.php:256
+msgid "We have sent more info to your email."
+msgstr ""
 
 # Test token 1
-msgid "HELLO_WORLD"
-msgstr "Hello World!"
+#~ msgid "HELLO_WORLD"
+#~ msgstr "Hello World!"
 
 # Test token 2
-msgid "TEST_TRANSLATION"
-msgstr "Testing translation..."
+#~ msgid "TEST_TRANSLATION"
+#~ msgstr "Testing translation..."
