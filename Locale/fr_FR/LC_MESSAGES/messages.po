@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-03-09 15:08+0700\n"
-"PO-Revision-Date: 2017-03-09 15:28+0700\n"
+"PO-Revision-Date: 2017-03-09 19:01+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -34,7 +34,7 @@ msgstr "Indique ton nom STP"
 
 #: expo.php:179
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: expo.php:180
 msgid "Please enter your email"
@@ -58,11 +58,11 @@ msgstr "Indique un numéro de téléphone valide STP"
 
 #: expo.php:194
 msgid "Your 3 favorite destinations..."
-msgstr ""
+msgstr "Tes 3 destinations favorites..."
 
 #: expo.php:219
 msgid "Your Age..."
-msgstr ""
+msgstr "Ton age..."
 
 #: expo.php:252
 msgid "Submit"
@@ -70,11 +70,11 @@ msgstr "Envoyer"
 
 #: expo.php:255
 msgid "Thank you!"
-msgstr ""
+msgstr "Merci!"
 
 #: expo.php:256
 msgid "We have sent more info to your email."
-msgstr ""
+msgstr "Nous vous avons envoyé plus d´informations par email"
 
 # Test token 1
 #~ msgid "HELLO_WORLD"
