@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-11-11 12:27+0700\n"
-"PO-Revision-Date: 2016-11-11 12:27+0700\n"
+"POT-Creation-Date: 2017-03-09 15:05+0700\n"
+"PO-Revision-Date: 2017-03-09 15:15+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: da_DK\n"
@@ -16,65 +16,68 @@ msgstr ""
 "X-Poedit-KeywordsList: _;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: expo.php:113
+#: expo.php:171
 msgid "First Name"
 msgstr "Fornavn"
 
-#: expo.php:114
+#: expo.php:172
 msgid "Please enter your first name"
 msgstr "Indsæt dit fornavn"
 
-#: expo.php:115
+#: expo.php:175
 msgid "Last Name"
 msgstr "Efternavn"
 
-#: expo.php:116
+#: expo.php:176
 msgid "Please enter your last name"
-msgstr ""
+msgstr "Indsæt dit efternavn"
 
-#: expo.php:117
+#: expo.php:179
 msgid "Email"
 msgstr "Email"
 
-#: expo.php:118
+#: expo.php:180
 msgid "Please enter your email"
 msgstr "Indsæt din email"
 
-#: expo.php:119
+#: expo.php:181
 msgid "Please enter a valid email"
 msgstr "Indsæt din gyldige email"
 
-#: expo.php:120
+#: expo.php:182
 msgid "Email domain don't exist"
-msgstr ""
+msgstr "e-mailen eksisterer ikke"
 
-#: expo.php:122
+#: expo.php:186
 msgid "Please enter your phonenumber"
 msgstr "Indsæt dit telefonnummer"
 
-#: expo.php:123
+#: expo.php:187
 msgid "Please enter a valid phonenumber"
 msgstr "Indsæt et gyldigt telefonnummer"
 
-#: expo.php:124
-msgid ""
-"Search the list by typing your country name, or enter your country code to "
-"select country"
+#: expo.php:194
+msgid "Your 3 favorite destinations..."
 msgstr ""
-"Søg på listen ved at skrive navnet på dit land, eller skriv landekoden på "
-"det valgte land"
 
-#: expo.php:133
+#: expo.php:219
+msgid "Your Age..."
+msgstr ""
+
+#: expo.php:252
 msgid "Submit"
 msgstr "Indsende"
 
-#: expo.php:137
+#: expo.php:255
 msgid "Thank you!"
 msgstr ""
 
-#: expo.php:138
+#: expo.php:256
 msgid "We have sent more info to your email."
 msgstr ""
+
+#~ msgid "Search the list by typing your country name, or enter your country code to select country"
+#~ msgstr "Søg på listen ved at skrive navnet på dit land, eller skriv landekoden på det valgte land"
 
 # Test token 1
 #~ msgid "HELLO_WORLD"
