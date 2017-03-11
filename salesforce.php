@@ -111,6 +111,8 @@
     curl_setopt($ch, CURLOPT_SSLVERSION, 6);
     curl_setopt($ch, URLOPT_FRESH_CONNECT, 1);
     $json_response = curl_exec($ch);
+    $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+    $body = substr($json_response, $header_size);
     $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
@@ -118,7 +120,10 @@
       $error['error'] = true;
       $error['response'] = $json_response;
       //return $error;
-      die("Error: call to URL $url failed with status $status, response $json_response");
+      //die("Error: call to URL $url failed with status $status, response $json_response");
+      $logData = sprintf("\"%s\",\"$LeadData\",\"$body\"\n", date("Y-m-d H:i:s"));
+      error_log($logData, 3, dirname(__file__) . '/log/expo.log');
+      return false;
     } else {
       $response = json_decode($json_response, true);
       return $response["id"];

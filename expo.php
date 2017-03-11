@@ -10,7 +10,13 @@
   $expo_name  = $vars[0];
   $title      = $vars[1];
   $market     = $vars[2];
-  $language   = $vars[3];
+
+  if (isset($_POST["submit"])) {
+    $language = $_POST['option_market'];
+  } else {
+    $language   = $vars[3];
+  };
+
 
   $markets = array(
     'en' => 'Europe/London',
@@ -249,7 +255,7 @@
           <input type="hidden" name="timezonediff" value="<?php echo $tz; ?>">
           <input type="hidden" name="geoip" id="geoip" value="">
           <input type="hidden" name="date" value="<?php echo date_format($from_date, 'Y-m-d'); ?>">
-          <input type="submit" name="submit" <?php echo ($small) ? 'class="small"' : ''; ?>" value="<?php _e('Submit'); ?>">
+          <input type="submit" name="submit" <?php echo ($small) ? 'class="small"' : ''; ?> value="<?php _e('Submit'); ?>">
         </form>
         <?php else: ?>
           <h2><?php _e('Thank you!'); ?></h2>
