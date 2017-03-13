@@ -17,7 +17,6 @@
     $language   = $vars[3];
   };
 
-
   $markets = array(
     'en' => 'Europe/London',
     'se' => 'Europe/Stockholm',
@@ -32,7 +31,7 @@
     'it' => 'Europe/Rome',
     'au' => 'Europe/Sidney',
     'in' => 'Asia/Karachi',
-    'us' => 'America/New_York '
+    'us' => 'America/New_York'
   );
 
   if (!isset($_POST['submit'])){
@@ -191,7 +190,6 @@
                 <input type="hidden" id="itlPhoneFull" class="itlPhoneFull brochure" name="itlPhoneFull" style="display: none"
                   data-msg-required="<?php _e('Please enter your phonenumber'); ?>"
                   data-msg-valid="<?php _e('Please enter a valid phonenumber'); ?>" data-toggle="popover"/>
-                <?php /* <p name="itl-phone" class="jsonly"><?php _e('Search the list by typing your country name, or enter your country code to select country'); ?></p> */ ?>
                 <input type="tel" name="itl-phone" id="itl-phone" class="itl-phone jsonly">
               </div>
           </div>
@@ -200,24 +198,22 @@
             <h4><?php _e('Your 3 favorite destinations...'); ?></h4>
             <div class="row row-centered">
               <div class="form-group">
-                  <div class="items-collection">
-
-                    <?php foreach ($Schools as $school): ?>
-                    <div class="items col-xs-2 col-centered">
-                        <div class="info-block block-info clearfix">
-                            <div data-toggle="buttons" class="btn-group multiselect">
-                                <label class="btn btn-default destination">
-                                    <div class="itemcontent">
-                                        <input type="checkbox" name="schools[]" autocomplete="off" value="<?php echo $school; ?>">
-                                        <h5><?php echo $school; ?></h5>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
+                <div class="items-collection">
+                  <?php foreach ($Schools as $school): ?>
+                  <div class="items col-xs-2 col-centered">
+                    <div class="info-block block-info clearfix">
+                      <div data-toggle="buttons" class="btn-group multiselect">
+                        <label class="btn btn-default destination">
+                          <div class="itemcontent">
+                            <input type="checkbox" name="schools[]" autocomplete="off" value="<?php echo $school; ?>">
+                            <h5><?php echo $school; ?></h5>
+                          </div>
+                        </label>
+                      </div>
                     </div>
-                    <?php endforeach; ?>
-
                   </div>
+                  <?php endforeach; ?>
+                </div>
               </div>
             </div>
           </div>
@@ -225,34 +221,31 @@
             <h4><?php _e('Your Age...'); ?></h4>
             <div class="row row-centered">
               <div class="form-group">
-                  <div class="items-collection">
-
-                    <?php foreach ($AgeGroups as $ageGroup): ?>
-                    <div class="items col-xs-2 col-centered">
-                        <div class="info-block block-info clearfix">
-                            <div data-toggle="buttons" class="btn-group multiselect">
-                                <label class="btn btn-default age">
-                                    <div class="itemcontent">
-                                        <input type="checkbox" name="age[]" autocomplete="off" value="<?php echo $ageGroup; ?>">
-                                        <h5><?php echo $ageGroup; ?></h5>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
+                <div class="items-collection">
+                  <?php foreach ($AgeGroups as $ageGroup): ?>
+                  <div class="items col-xs-2 col-centered">
+                    <div class="info-block block-info clearfix">
+                      <div data-toggle="buttons" class="btn-group multiselect">
+                        <label class="btn btn-default age">
+                          <div class="itemcontent">
+                            <input type="checkbox" name="age[]" autocomplete="off" value="<?php echo $ageGroup; ?>">
+                            <h5><?php echo $ageGroup; ?></h5>
+                          </div>
+                        </label>
+                      </div>
                     </div>
-                    <?php endforeach; ?>
-
                   </div>
+                  <?php endforeach; ?>
+                </div>
               </div>
             </div>
           </div>
           <?php endif; ?>
-
           <input type="hidden" name="option_market" value="<?php echo $market; ?>">
           <input type="hidden" name="title" value="<?php echo $title; ?>">
           <input type="hidden" name="utm_source" value="Expo">
           <input type="hidden" name="utm_medium" value="<?php echo $expo_name; ?>">
-          <input type="hidden" name="timezonediff" value="<?php echo $tz; ?>">
+          <input type="hidden" name="timezonediff" value="<?php echo date_format($from_date, 'P'); ?>">
           <input type="hidden" name="geoip" id="geoip" value="">
           <input type="hidden" name="date" value="<?php echo date_format($from_date, 'Y-m-d'); ?>">
           <input type="submit" name="submit" <?php echo ($small) ? 'class="small"' : ''; ?> value="<?php _e('Submit'); ?>">
@@ -261,7 +254,6 @@
           <h2><?php _e('Thank you!'); ?></h2>
           <h4><?php _e('We have sent more info to your email.'); ?></h4>
         <?php endif; ?>
-
     </div>
   </body>
 

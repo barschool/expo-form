@@ -32,8 +32,6 @@
     curl_setopt($ch, CURLOPT_SSLVERSION, 6);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
     curl_setopt($ch, URLOPT_FRESH_CONNECT, 1);
-    //curl_setopt($ch, CURLOPT_VERBOSE, true);
-    //curl_setopt($ch, CURLOPT_STDERR, fopen('php://stderr', 'w'));
 
     $data = curl_exec($ch);
     curl_close($ch);
@@ -80,8 +78,8 @@
     } else {
       $LeadData['LeadSource'] = 'Expos';
       $LeadData['UTM_Source__c'] = $_POST['utm_source'];
-      $LeadData['Expo_City__c'] = $_POST['utm_medium'];
-      $LeadData['Expo_Manager__c'] = $_POST['title'];
+      $LeadData['Expo_City__c'] = ucwords($_POST['utm_medium']);
+      $LeadData['Expo_Manager__c'] = ucwords($_POST['title']);
       //$LeadData['Expo_Name__c'] = $_POST['utm_medium']; Need to add one more path component for this if really needed.
       $LeadData['Expo_date__c'] = $_POST['date'];
       if( !empty($_POST['schools']) ){
@@ -121,7 +119,7 @@
       $error['response'] = $json_response;
       //return $error;
       //die("Error: call to URL $url failed with status $status, response $json_response");
-      $logData = sprintf("\"%s\",\"$LeadData\",\"$body\"\n", date("Y-m-d H:i:s"));
+      $logData = sprintf("\"%s\"|$LeadData|$body\n", date("Y-m-d H:i:s"));
       error_log($logData, 3, dirname(__file__) . '/log/expo.log');
       return false;
     } else {

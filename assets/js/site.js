@@ -198,6 +198,7 @@ $(document).ready(function(){
     return $("#itl-phone", form).intlTelInput("isValidNumber");
   });
 
+  /*
   $('input[name="timezonediff"]').val(function(){
     var d, offset, sign, hours, minutes, result
     d	= new Date();
@@ -209,4 +210,5 @@ $(document).ready(function(){
     result = sign + (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
     return result;
   });
+  */
 });
