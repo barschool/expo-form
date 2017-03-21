@@ -53,7 +53,7 @@
       'SE' => 'sv'
     );
 
-    $site_market    = strtoupper($_POST['option_market']);
+    $site_market    = strtoupper($_POST['market']);
     $language       = isset($SfLanguages[ $site_market ]) ? $SfLanguages[ $site_market ] : 'en_US';
     $debug          = false;
     $email          = RFC2822_email($_POST['email']);
@@ -70,17 +70,17 @@
       'Timezone__c'         => $_POST['timezonediff'],
     );
 
-    if ($_POST['utm_medium'] === 'School Referral') {
+    if ($_POST['expoCity'] === 'School Referral') {
       $LeadData['LeadSource'] = 'School Referral';
-      $LeadData['Referring_School__c'] = $_POST['title'];
-      $LeadData['Page_title__c'] = $_POST['title'];
+      $LeadData['Referring_School__c'] = $_POST['expoManager'];
+      $LeadData['Page_title__c'] = $_POST['expoManager'];
 
     } else {
       $LeadData['LeadSource'] = 'Expos';
       $LeadData['UTM_Source__c'] = $_POST['utm_source'];
-      $LeadData['Expo_City__c'] = ucwords($_POST['utm_medium']);
-      $LeadData['Expo_Manager__c'] = ucwords($_POST['title']);
-      //$LeadData['Expo_Name__c'] = $_POST['utm_medium']; Need to add one more path component for this if really needed.
+      $LeadData['Expo_City__c'] = ucwords($_POST['expoCity']);
+      $LeadData['Expo_Manager__c'] = (!empty($_POST['expoManager'])) ? ucwords($_POST['expoManager']) : '';
+      $LeadData['Expo_Name__c'] = ucwords($_POST['expoName']);
       $LeadData['Expo_date__c'] = $_POST['date'];
       if( !empty($_POST['schools']) ){
         foreach($_POST['schools'] as $key => $school){
@@ -91,6 +91,8 @@
           $LeadData['Age_group__c'] = $_POST['age'][0];
       };
     };
+
+    //echo '<pre>'; print_r($LeadData); echo '</pre>';
 
     $LeadData = json_encode($LeadData);
 

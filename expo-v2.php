@@ -1,46 +1,39 @@
 <?php
+  include_once('./config.php');
   // Submit handler
   if (isset($_POST["submit"])) {
     include_once('./salesforce.php');
     $result = createLead();
   };
 
-  $vars = explode('/',$_GET['q']);
 
-  $expo_name  = $vars[0];
-  $title      = $vars[1];
-  $market     = $vars[2];
+// http://ebs-platform.com/expo/New York/National Fair/Ray Berry/dk/es/2017-02-21/2017-05-21
+
+  $config = unserialize(CONFIG);
+  $vars = explode('/',base64_decode($_GET['q']));
+
+  $expoCity     = $vars[0];
+  $expoName     = $vars[1];
+  $expoManager  = $vars[2];
+  $market       = $vars[3];
+  $markets      = $config['markets'];
+  $Schools      = $config['Schools'];
+  $AgeGroups    = $config['AgeGroups'];
+  $SupportedLanguages = $config['SupportedLanguages'];
 
   if (isset($_POST["submit"])) {
     $language = $_POST['option_market'];
   } else {
-    $language   = $vars[3];
+    $language   = $vars[4];
   };
-
-  $markets = array(
-    'en' => 'Europe/London',
-    'se' => 'Europe/Stockholm',
-    'no' => 'Europe/Stockholm',
-    'dk' => 'Europe/Stockholm',
-    'fi' => 'Europe/Stockholm',
-    'ie' => 'Europe/Dublin',
-    'de' => 'Europe/Stockholm',
-    'nl' => 'Europe/Stockholm',
-    'es' => 'Europe/Madrid',
-    'fr' => 'Europe/Paris',
-    'it' => 'Europe/Rome',
-    'au' => 'Europe/Sidney',
-    'in' => 'Asia/Karachi',
-    'us' => 'America/New_York'
-  );
 
   if (!isset($_POST['submit'])){
     if (!$markets[$market]){
       exit( sprintf("Unsupported market, supported values: %s.", implode(', ', array_keys($markets))) );
     } else {
       date_default_timezone_set( $markets[$market] );
-      $from_date = DateTime::createFromFormat('j-M-Y', $vars[4]);
-      $to_date = DateTime::createFromFormat('j-M-Y', $vars[5]);
+      $from_date = DateTime::createFromFormat('Y-m-d', $vars[5]);
+      $to_date = DateTime::createFromFormat('Y-m-d', $vars[6]);
       $today = new DateTime();
 
       if ( !$from_date || !$to_date ){
@@ -52,18 +45,6 @@
   };
 
   // I18N support
-  $SupportedLanguages = array(
-    'sv' => 'sv_SE',
-    'no' => 'nb_NO',
-    'da' => 'da_DK',
-    'fi' => 'fi_FI',
-    'en' => 'en_US',
-    'de' => 'de_DE',
-    'es' => 'es_ES',
-    'it' => 'it_IT',
-    'fr' => 'fr_FR'
-  );
-
   $language = array_key_exists($language, $SupportedLanguages) ? $SupportedLanguages[$language] : 'en_US';
   $language = "$language.UTF-8";
   putenv("LANG=" . $language);
@@ -80,39 +61,7 @@
     echo _($text);
   };
 
-  $Schools = array(
-    'Cape Town',
-    'Rome',
-    'Madrid',
-    'Mallorca',
-    'Miami',
-    'Las Vegas',
-    'St. Martin',
-    'Berlin',
-    'Paris',
-    'Milan',
-    'New York',
-    'Manchester',
-    'Amsterdam',
-    'Helsinki',
-    'Copenhagen',
-    'Kos',
-    'Dublin',
-    'London',
-    'Sydney',
-    'Phuket',
-    'Barcelona',
-    'Oslo',
-    'Stockholm',
-  );
 
-  $AgeGroups = array(
-    'Under 18',
-    '18-21',
-    '22-24',
-    '25-27',
-    '28+',
-  );
 ?>
 
 <!DOCTYPE html>
@@ -164,9 +113,9 @@
     </style>
   </head>
 
-  <?php $small = ($expo_name == 'School Referral');  ?>
+  <?php $small = ($expoName == 'School Referral');  ?>
   <body>
-    <div id="page-wrap" <?php echo ($expo_name == 'School Referral') ? 'class="small"' : ''; ?>>
+    <div id="page-wrap" <?php echo ($expoName == 'School Referral') ? 'class="small"' : ''; ?>>
       <img class="logo" src=<?php echo "$url/assets/img/ebs_logo.jpg" ?>>
         <?php if ( !isset($_POST['submit']) ): ?>
         <form accept-charset="UTF-8" action='<?php echo $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data" id="form" method="POST">
@@ -193,7 +142,7 @@
                 <input type="tel" name="itl-phone" id="itl-phone" class="itl-phone jsonly">
               </div>
           </div>
-          <?php if ( $expo_name != 'School Referral'): ?>
+          <?php if ( $expoName != 'School Referral'): ?>
           <div class="container multiselect">
             <h4><?php _e('Your 3 favorite destinations...'); ?></h4>
             <div class="row row-centered">
@@ -241,10 +190,11 @@
             </div>
           </div>
           <?php endif; ?>
-          <input type="hidden" name="option_market" value="<?php echo $market; ?>">
-          <input type="hidden" name="title" value="<?php echo $title; ?>">
+          <input type="hidden" name="market" value="<?php echo $market; ?>">
+          <input type="hidden" name="expoCity" value="<?php echo $expoCity; ?>">
+          <input type="hidden" name="expoName" value="<?php echo $expoName; ?>">
+          <input type="hidden" name="expoManager" value="<?php echo $expoManager; ?>">
           <input type="hidden" name="utm_source" value="Expo">
-          <input type="hidden" name="utm_medium" value="<?php echo $expo_name; ?>">
           <input type="hidden" name="timezonediff" value="<?php echo date_format($from_date, 'P'); ?>">
           <input type="hidden" name="geoip" id="geoip" value="">
           <input type="hidden" name="date" value="<?php echo date_format($from_date, 'Y-m-d'); ?>">

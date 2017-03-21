@@ -10,9 +10,16 @@ RewriteBase /expo
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !\.(jpg|png|css|js|php)$
-RewriteRule ^(.*)$ expo.php?q=$1 [L,QSA]
+RewriteRule ^.*(/assets/.*)$ %{HTTP_HOST}/$1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^.*(/assets/.*)$ %{HTTP_HOST}/$1 [L]
+RewriteCond %{REQUEST_URI} ^.*/v2/.*$
+RewriteRule ^v2/(.*)$ expo-v2.php?q=$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\.(jpg|png|css|js|php)$
+RewriteRule ^(.*)$ expo-v1.php?q=$1 [L,QSA]
+
+
