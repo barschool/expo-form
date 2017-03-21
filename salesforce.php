@@ -13,7 +13,7 @@
   }
 
   function salesforceAuthenticate(){
-    require_once('./config.php');
+    require_once('./salesforce.config.php');
 
     $url = SF_INSTANCE_URL . "/services/oauth2/token";
     $ch = curl_init($url);
