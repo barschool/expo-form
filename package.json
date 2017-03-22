@@ -1,0 +1,22 @@
+{
+  "name": "expo",
+  "version": "1.0.0",
+  "description": "There is currently no storage back-end. All dynamic variables are extracted from the url path, then rewritten in .htaccess if it's not an existing file.",
+  "main": "flightplan.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barschool/expo-form.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barschool/expo-form/issues"
+  },
+  "homepage": "https://github.com/barschool/expo-form#readme",
+  "devDependencies": {
+    "flightplan": "^0.6.15"
+  }
+}
