@@ -26,6 +26,12 @@ $config = unserialize(CONFIG);
   </style>
 
   <script>
+    function b64EncodeUnicode(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+      }));
+    };
+
     $(document).ready(function(){
       $('#generateLink').on('click', function(e){
         var baseUrl = 'http://ebs-platform.com/expo/v2/';
@@ -42,7 +48,7 @@ $config = unserialize(CONFIG);
 
         var $container = $('#output');
         $container.show();
-        $container.find('code.encoded').text( baseUrl + btoa( path.join('/') ) );
+        $container.find('code.encoded').text( baseUrl + b64EncodeUnicode( path.join('/') ) );
         $container.find('code.plain').text( baseUrl + path.join('/') );
         return false;
       });
