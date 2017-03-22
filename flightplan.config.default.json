@@ -1,0 +1,8 @@
+{
+  "prod": {
+    "token": "github oauth token",
+    "host": "ebs-platform.com",
+    "username": "production host username",
+    "privateKey": "private key file for authentication to production"
+  }
+}
