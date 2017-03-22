@@ -14,7 +14,7 @@
   $market       = $vars[2];
 
   if (isset($_POST["submit"])) {
-    $language = $_POST['option_market'];
+    $language = $_POST['language'];
   } else {
     $language   = $vars[3];
   };
@@ -244,6 +244,7 @@
           </div>
           <?php endif; ?>
           <input type="hidden" name="market" value="<?php echo $market; ?>">
+          <input type="hidden" name="language" value="<?php echo $vars[3]; ?>">
           <input type="hidden" name="expoManager" value="<?php echo $expoManager; ?>">
           <input type="hidden" name="utm_source" value="Expo">
           <input type="hidden" name="expoCity" value="<?php echo $expoName; ?>">

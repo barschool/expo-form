@@ -22,7 +22,7 @@
   $SupportedLanguages = $config['SupportedLanguages'];
 
   if (isset($_POST["submit"])) {
-    $language = $_POST['option_market'];
+    $language = $_POST['language'];
   } else {
     $language   = $vars[4];
   };
@@ -191,6 +191,7 @@
           </div>
           <?php endif; ?>
           <input type="hidden" name="market" value="<?php echo $market; ?>">
+          <input type="hidden" name="language" value="<?php echo $vars[4]; ?>">
           <input type="hidden" name="expoCity" value="<?php echo $expoCity; ?>">
           <input type="hidden" name="expoName" value="<?php echo $expoName; ?>">
           <input type="hidden" name="expoManager" value="<?php echo $expoManager; ?>">
