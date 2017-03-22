@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-03-09 15:07+0700\n"
-"PO-Revision-Date: 2017-03-09 15:22+0700\n"
+"PO-Revision-Date: 2017-03-22 08:08+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -58,11 +58,11 @@ msgstr "Por favor introduce un número de teléfono correcto"
 
 #: expo.php:194
 msgid "Your 3 favorite destinations..."
-msgstr ""
+msgstr "Tus 3 destinos favoritos..."
 
 #: expo.php:219
 msgid "Your Age..."
-msgstr ""
+msgstr "Tu  edad..."
 
 #: expo.php:252
 msgid "Submit"
@@ -70,11 +70,11 @@ msgstr "Enviar"
 
 #: expo.php:255
 msgid "Thank you!"
-msgstr ""
+msgstr "Muchas Gracais!"
 
 #: expo.php:256
 msgid "We have sent more info to your email."
-msgstr ""
+msgstr "Hem enviat més informació al seu correu electrònic."
 
 # Test token 1
 #~ msgid "HELLO_WORLD"
