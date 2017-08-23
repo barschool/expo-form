@@ -2,8 +2,8 @@
 $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/expo';
 include_once('../config.php');
 $config = unserialize(CONFIG);
+/* exit(var_dump($config['Schools'])); */
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,23 +33,54 @@ $config = unserialize(CONFIG);
     };
 
     $(document).ready(function(){
+
+      $('#destinations').on('click', function(e){
+        console.log($('#destination').val());
+        if( $('#destinations').is(":checked") ){
+          $('#destinationContainer').hide();
+        } else {
+          $('#destinationContainer').show();
+        }
+      });
+      
       $('#generateLink').on('click', function(e){
         var baseUrl = 'http://ebs-platform.com/expo/v2/';
         var path = [];
         var $form = $('form');
-
-        path.push( $form.find('#expoCity').val() );
-        path.push( $form.find('#expoName').val() );
-        path.push( $form.find('#expoManager').val() );
-        path.push( $form.find('#market option:selected').val() );
-        path.push( $form.find('#language option:selected').val() );
-        path.push( $form.find('#startDate').val() );
-        path.push( $form.find('#endDate').val() );
-
         var $container = $('#output');
+        var missing = [];
+        var showDestinations = $('#destinations').is(":checked") ? 1 : 0;
+
+        var expoCity = $form.find('#expoCity').val();
+        var expoName = $form.find('#expoName').val();
+        var expoManager = $form.find('#expoManager').val();
+
+        if(!expoName) missing.push('Expo Name');
+        if(!expoCity) missing.push('Expo City');
+        if(!expoManager) missing.push('Expo Manager');
+
         $container.show();
-        $container.find('code.encoded').text( baseUrl + b64EncodeUnicode( path.join('/') ) );
-        $container.find('code.plain').text( baseUrl + path.join('/') );
+
+        if(missing.length){
+          $container.find('code.plain').text( 'Required fields missing: ' + missing.join(', '));
+        } else {
+          path.push( expoCity );
+          path.push( expoName );
+          path.push( expoManager );
+          path.push( $form.find('#market option:selected').val() );
+          path.push( $form.find('#language option:selected').val() );
+          path.push( $form.find('#startDate').val() );
+          path.push( $form.find('#endDate').val() );
+          path.push( $form.find('#endDate').val() );
+          path.push( showDestinations );
+
+          if(showDestinations == 0){
+            path.push( $('#destination').val() );
+          }
+
+          $container.find('code.encoded').text( baseUrl + b64EncodeUnicode( path.join('/') ) );
+          $container.find('code.plain').text( baseUrl + path.join('/') );
+        }
         return false;
       });
     });
@@ -114,6 +145,22 @@ $config = unserialize(CONFIG);
       <label for="endDate" class="col-sm-2 col-form-label">Start Date:</label>
       <div class="col-sm-6">
         <input class="form-control" type="date" value="<?php echo date('Y-m-d') ?>" id="endDate">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="destinations" class="col-sm-2 col-form-label">Fix School?</label>
+      <div class="col-sm-1">
+        <div class="checkbox">
+          <label><input checked id="destinations" type="checkbox" value="">No</label>
+        </div>
+      </div>
+      <div hidden class="col-sm-5" id="destinationContainer">
+        <select  class="form-control" id="destination">
+          <?php foreach( $config['Schools'] as $key => $destination): ?>
+            <option value="<?php echo $key ?>"><?php echo $destination ?></option>
+          <?php endforeach; ?>
+        </select>
       </div>
     </div>
     <div class="form-group row">
