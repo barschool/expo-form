@@ -53,6 +53,7 @@ $config['Schools'] = array(
   'Barcelona',
   'Oslo',
   'Stockholm',
+  'None'
 );
 
 $config['AgeGroups'] = array(
