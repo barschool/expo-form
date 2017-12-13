@@ -133,7 +133,11 @@
       <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/intlTelInput.css"; ?>'>
       <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/bootstrap.min.css"; ?>'>
       <link rel="stylesheet" type="text/css" href='<?php echo "$url/assets/css/style.css"; ?>'>
-      <script type="text/javascript" src='<?php echo "$url/assets/js/site.js"; ?>'></script>
+      <?php if($expoName == 'School Referral'): ?>
+        <script type="text/javascript" src='<?php echo "$url/assets/js/no-phone-required.js"; ?>'></script>
+        <?php else: ?>
+        <script type="text/javascript" src='<?php echo "$url/assets/js/site.js"; ?>'></script>
+      <?php endif; ?>
       <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/intlTelInput.js"; ?>'></script>
       <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/utils.js"; ?>'></script>
       <script type="text/javascript" src='<?php echo "$url/assets/js/vendor/bootstrap.js"; ?>'></script>

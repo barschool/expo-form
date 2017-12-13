@@ -25,6 +25,7 @@ plan.local(function(local) {
 
 // run commands on remote host
 plan.remote(function(remote) {
+  deploy = true;
   if(deploy){
     remote.log('Pulling master..');
     remote.exec('cd /var/www/html/expo && git pull origin master');
